@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar';
+import LandingPage from './components/LandingPage';
 
+import { createTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@mui/material';
+
+const customTheme = createTheme({
+  typography: {
+    fontFamily: 'Roboto', // Replace 'Your Desired Font' with your preferred font
+  },
+});
 function App() {
   return (
+    <ThemeProvider theme={customTheme}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <LandingPage />
     </div>
+    </ThemeProvider>
   );
 }
 
