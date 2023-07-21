@@ -12,7 +12,7 @@ const [signUpFlag , setSignUpFlag] = useState(false);
     <Box
       component="form"
       sx={{
-        paddingTop:12,
+        paddingTop:4,
         marginTop:12,
         display:'flex',
         flexDirection:'column',
