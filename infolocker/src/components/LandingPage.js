@@ -7,16 +7,16 @@ function LandingPage() {
     <div className='container' style={{backgroundImage:`url(${background})`,height:"100vh",backgroundSize:"40%",backgroundRepeat:"no-repeat",backgroundPosition:"right"}}>
             <Navbar isLoggedIn={false}/>
             <Container sx={{display:'flex',flexDirection:'column',alignItems:'flex-start',marginTop:'8%',textAlign:'center'}}>
-                <Typography  fontSize={40} >
+                <Typography  fontSize={40} sx={{color:"#36365F"}}>
                     Beat The Hassle,
                 </Typography>
-                <Typography fontSize={40}>
+                <Typography fontSize={40} sx={{color:"#36365F"}}>
                     All Your Information In a Single Place.
                 </Typography>
-                <Typography fontSize={20} sx={{marginTop:"30px"}}>
+                <Typography fontSize={20} sx={{marginTop:"30px",color:'#3C3D5C'}}>
                     Save all your documents,details and links in a single place 
                 </Typography>
-                <Typography fontSize={20}>
+                <Typography fontSize={20} sx={{color:'#3C3D5C'}}>
                    with InfoLocker.
                 </Typography>
             </Container>
