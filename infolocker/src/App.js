@@ -9,23 +9,35 @@ import LandingPage from './components/LandingPage';
 import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@mui/material';
 import HomePage from "./components/homepage/HomePage";
+import DataForm from "./components/dataForm/DataForm";
 
 const customTheme = createTheme({
+
+ 
+
   typography: {
     fontFamily: 'Roboto', // Replace 'Your Desired Font' with your preferred font
   },
 });
+
+
+
+
+
+
+
 function App() {
 
   return (
 
     <BrowserRouter>
     <ThemeProvider theme={customTheme}>
-    <BackgroundWrapper variantt="red">
+    <BackgroundWrapper variantt="blue">
     <Routes>
         <Route path="/" element={<LandingPage/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<HomePage />} />
+        <Route path="/dataForm" element={<DataForm />} />
       </Routes>
       </BackgroundWrapper>
     </ThemeProvider>

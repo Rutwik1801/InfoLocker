@@ -5,8 +5,10 @@ import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/FileCopyTwoTone';
 import EditIcon from '@mui/icons-material/EditTwoTone';
 import DeleteIcon from '@mui/icons-material/DeleteTwoTone';
+import {useNavigate} from 'react-router-dom'
 
 function DataComponent({label,value,isFile}) {
+    const navigate = useNavigate();
 
     const handleClick=()=>{
         navigator.clipboard.writeText("hello")
@@ -16,7 +18,11 @@ function DataComponent({label,value,isFile}) {
             console.log("copy")
         }
     }
-
+    const handleEditClick = (e)=>{
+       
+       navigate("/dataForm" , { state: { data: {label , value} } });
+    }
+   
   return (
     <Grid  item xs={12} sm={6}>
     <TextField 
@@ -28,7 +34,7 @@ InputProps={{
 readOnly:true,
 endAdornment: (
     <div style={{display:"flex"}}>
-<IconButton sx={{color:"#9E465B"}} onClick={handleClick}>
+<IconButton sx={{color:"#9E465B"}} onClick={handleEditClick}>
     <EditIcon />
 </IconButton>
 <IconButton sx={{color:"#9E465B"}} onClick={handleClick}>
