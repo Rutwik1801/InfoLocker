@@ -12,64 +12,52 @@ import Header from './Header'
 import FormHelperText from '@mui/material/FormHelperText';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+// import IconButton from '@material-ui/core/IconButton';
+import Avatar from '@mui/material/Avatar';
+import DataComponent from './DataComponent';
+// import { Search } from '@material-ui/icons';
 
 function HomePage() {
   return (
     <div>
         <Navbar isLoggedIn={true}/>
-        <Box sx={{position:"relative",width:{sx:"100%",md:"60%"},zIndex:2,border:"1px solid black",padding:4}}>
-          <Grid sx={{marginBottom:"20px"}}>
-            <Header title="Details"/>
-            <Grid container spacing={2} sx={{marginTop:"20px"}}>
-            <Grid  item xs={12} sm={4} lg={3}>
-            <TextField
-          id="outlined-read-only-input"
-          label="Read Only"
-          defaultValue="Hello World"
-          InputProps={{
-            readOnly: true,
-          }}
-        />
-      
-            </Grid>
-            <Grid  item xs={12} sm={4} lg={3}>
-            <TextField
-          id="outlined-read-only-input"
-          label="Read Only"
-          defaultValue="Hello World"
-          InputProps={{
-            readOnly: true,
-          }}
-        />
-           
-            </Grid>
-            <Grid  item xs={12} sm={4} lg={3}>
-            <TextField
-          id="outlined-read-only-input"
-          label="Read Only"
-          defaultValue="Hello World"
-          InputProps={{
-            readOnly: true,
-          }}
-        />
-          
-            </Grid>
-            <Grid  item xs={12} sm={4} lg={3}>
-
-            </Grid>
-            <Grid  item xs={12} sm={4} lg={3}>
-                hhhhhhhhhh            
-            </Grid>
-            </Grid>
-            
-          </Grid>
+        <div style={{padding:"30px"}}>
+        <Box sx={{background:'none',width:{sx:"100%",md:"60%"},border:"1px solid black",padding:4}}>
           <Grid>
+            <Header title="Details"/>
+            <Grid container spacing={2} sx={{marginTop:3}}>
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            </Grid>
+            </Grid>
+          <Grid sx={{marginTop:5,marginBottom:5}}>
           <Header title="Links" />
+          <Grid container spacing={2} sx={{marginTop:3}}>
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            </Grid>
           </Grid>
           <Grid>
           <Header title="Files" />
+          <Grid container spacing={2} sx={{marginTop:3}}>
+            <DataComponent isFile={true} label="name" value="rutwik" />
+            <DataComponent isFile={true} label="name" value="rutwik" />
+            <DataComponent isFile={true} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            <DataComponent isFile={false} label="name" value="rutwik" />
+            </Grid>
           </Grid>
         </Box>
+        </div>
     </div>
   )
 }

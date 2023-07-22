@@ -20,12 +20,15 @@ function App() {
   return (
 
     <BrowserRouter>
-    <BackgroundWrapper variantt="red"></BackgroundWrapper>
+    <ThemeProvider theme={customTheme}>
+    <BackgroundWrapper variantt="red">
     <Routes>
         <Route path="/" element={<LandingPage/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<HomePage />} />
       </Routes>
+      </BackgroundWrapper>
+    </ThemeProvider>
     </BrowserRouter>
   );
 }

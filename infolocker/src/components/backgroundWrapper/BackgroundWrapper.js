@@ -8,7 +8,7 @@ export default function BackgroundWrapper(props) {
 
   return (
     <div  className={`container ${bg}`} >
-
+  {props.children}
    </div>
   )
 }

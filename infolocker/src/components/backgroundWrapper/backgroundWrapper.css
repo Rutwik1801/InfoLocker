@@ -13,6 +13,7 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
+    z-index: -1;
 }
 .bg-red {
     background-image: url(../../assets/bg-red.png);
