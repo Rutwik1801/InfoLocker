@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from './Navbar'
-import background from "../assets/bg.png";
 import { Typography,Container } from '@mui/material';
 function LandingPage() {
   return (

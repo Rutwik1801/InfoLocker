@@ -2,9 +2,9 @@
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    height: 100vh;
+    background-attachment: fixed;
+    /* height: 100vh; */
     width: 100%;
-    background-image: url(../../../public/images/Group\ 3.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: right;
@@ -13,4 +13,11 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
+}
+.bg-red {
+    background-image: url(../../assets/bg-red.png);
+}
+
+.bg-blue{
+    background-image: url(../../assets/bg-blue.png);
 }
