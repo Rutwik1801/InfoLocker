@@ -7,25 +7,25 @@ import EditIcon from '@mui/icons-material/EditTwoTone';
 import DeleteIcon from '@mui/icons-material/DeleteTwoTone';
 import {useNavigate} from 'react-router-dom'
 
-function DataComponent({label,value,isFile}) {
+function DataComponent({label,value,type}) {
     const navigate = useNavigate();
-
     const handleClick=()=>{
         navigator.clipboard.writeText("hello")
-        if(isFile){
+        if(type==="file"){
             console.log("downoad")
         }else{
             console.log("copy")
         }
     }
     const handleEditClick = (e)=>{
-       
-       navigate("/dataForm" , { state: { data: {label , value} } });
+       console.log(type)
+       navigate("/dataForm" , { state: { data: {label , value,type} } });
     }
    
   return (
     <Grid  item xs={12} sm={6}>
     <TextField 
+      
          sx={{boxShadow:"0px 1px 5px rgba(0,0,0,0.1)"}}
               id="outlined-read-only-input"
               label={label}
@@ -41,7 +41,7 @@ endAdornment: (
     <DeleteIcon />
 </IconButton>
 <IconButton sx={{color:"#9E465B"}} onClick={handleClick}>
-    {isFile?<DownloadIcon />:<ContentCopyIcon />}
+    {type==="files"?<DownloadIcon />:<ContentCopyIcon />}
 </IconButton>
     </div>
 

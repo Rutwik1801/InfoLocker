@@ -31,7 +31,7 @@ function App() {
   return (
 
     <BrowserRouter>
-    <ThemeProvider theme={customTheme}>
+    {/* <ThemeProvider theme={customTheme}> */}
     <BackgroundWrapper variantt="blue">
     <Routes>
         <Route path="/" element={<LandingPage/>} />
@@ -40,7 +40,7 @@ function App() {
         <Route path="/dataForm" element={<DataForm />} />
       </Routes>
       </BackgroundWrapper>
-    </ThemeProvider>
+    {/* </ThemeProvider> */}
     </BrowserRouter>
   );
 }

@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button, Typography , Grid } from '@mui/material';
-
+import Navbar from "../Navbar"
 export default function DataForm() {
 const [signUpFlag , setSignUpFlag] = useState(false); 
 const location = useLocation();
@@ -13,18 +13,21 @@ const location = useLocation();
 const receivedData = location.state.data;
 const [labelData , setLabelData] = useState(receivedData.label);
 const [valueData , setValueData] = useState(receivedData.value);
-const title = receivedData.title;
-
+const type = receivedData.type;
+const action=receivedData.label.length!==0?"Edit":"Enter";
 
   return (
+    <div>
+      <Navbar isLoggedIn={true}/>
     <Box
       component="form"
       sx={{
+        width:{sx:"100%",md:"60%"},
         paddingTop:4,
-        marginTop:12,
+        marginTop:6,
         display:'flex',
         flexDirection:'column',
-        margin:'auto' , 
+        // margin:'auto' , 
         textAlign:'center' ,
         zIndex:1 , 
        
@@ -34,7 +37,7 @@ const title = receivedData.title;
       autoComplete="off"
     >
       <Typography variant='h4' sx={{mt:2  , zIndex:1}}>Welcome back</Typography>
-      <Typography variant='h6' sx={{ mb:2 ,  zIndex:1}}>Please enter your details</Typography>
+      <Typography variant='h6' sx={{ mb:2 ,  zIndex:1}}>Please {action} your {type}</Typography>
       
 
       <Grid container > 
@@ -51,7 +54,7 @@ const title = receivedData.title;
       </Grid>
     </Grid>
 
-    <Grid container>
+    {!(type==="files") && <Grid container>
       <Grid item xs={10} md={7}  sx={{ width: '100%', margin: 'auto', mt: 2, mb: 2 }}>
         <TextField
           onChange={(e)=>{setValueData(e.target.value)}}
@@ -61,8 +64,18 @@ const title = receivedData.title;
           value = {valueData}
         />
       </Grid>
-    </Grid>
-
+    </Grid>}
+    {type==="files" &&<Grid container>
+      <Grid item xs={10} md={7}  sx={{ width: '100%', margin: 'auto', mt: 2, mb: 2 }}>
+        <TextField
+        type='file'
+          onChange={(e)=>{setValueData(e.target.value)}}
+          variant="outlined"
+          sx={{width:'100%' }}
+          // value = {valueData}
+        />
+      </Grid>
+    </Grid>}
    
 
     <Grid container>
@@ -72,5 +85,6 @@ const title = receivedData.title;
     </Grid>
 
     </Box>
+    </div>
   );
 }
