@@ -6,7 +6,6 @@ import DataComponent from './DataComponent';
 import {dummyData} from "../../utils/data"
 
 function HomePage() {
-  console.log(dummyData[0].details)
   return (
     <div>
         <Navbar isLoggedIn={true}/>

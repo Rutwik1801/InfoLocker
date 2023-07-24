@@ -10,6 +10,7 @@ import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@mui/material';
 import HomePage from "./components/homepage/HomePage";
 import DataForm from "./components/dataForm/DataForm";
+import { useState } from "react";
 
 const customTheme = createTheme({
 
@@ -28,6 +29,7 @@ const customTheme = createTheme({
 
 function App() {
 
+
   return (
 
     <BrowserRouter>
@@ -35,7 +37,7 @@ function App() {
     <BackgroundWrapper variantt="blue">
     <Routes>
         <Route path="/" element={<LandingPage/>} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login  />} />
         <Route path="/profile" element={<HomePage />} />
         <Route path="/dataForm" element={<DataForm />} />
       </Routes>

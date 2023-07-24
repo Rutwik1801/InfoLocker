@@ -10,7 +10,7 @@ function Login() {
    <div>
     <Navbar />
     <div className='left'>
-      <LoginForm/>
+      <LoginForm  />
     </div>
   
     </div>

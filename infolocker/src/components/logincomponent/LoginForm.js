@@ -3,10 +3,87 @@ import {useState} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button, Typography , Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import  signUpHandler  from '../../firebase';
+import app from '../../firebase';
+import firebase from 'firebase/app';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {  signOut ,createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth";
+
 
 export default function LoginForm() {
 const [signUpFlag , setSignUpFlag] = useState(false); 
 
+
+const [email,setEmail]=useState("");
+const [password,setPassword]=useState("");
+const [confirmPassword,setConfirmPassword]=useState("");
+
+const navigate=useNavigate();
+const auth=getAuth()
+const provider = new GoogleAuthProvider();
+const handleClick=async ()=>{
+  console.log(signUpFlag)
+  if(signUpFlag){
+    if(password===confirmPassword){
+
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user.uid)
+        // ...
+      })
+      .catch((error) => {
+          console.log(error)
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+
+      
+  }
+}
+else {
+  signInWithEmailAndPassword(auth, email, password)
+.then((userCredential) => {
+  // Signed in 
+  const user = userCredential.user;
+  console.log(user.uid)
+  // ...
+})
+.catch((error) => {
+  console.log(error)
+  const errorCode = error.code;
+  const errorMessage = error.message;
+});
+
+}}
+
+const handleGoogleClick=async()=>{
+
+signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    console.log(user)
+    navigate("/profile")
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+}
 
   return (
     <Box
@@ -32,9 +109,13 @@ const [signUpFlag , setSignUpFlag] = useState(false);
       <Grid container > 
       <Grid item xs={10} md={7} sx={{  width: '100%', margin: 'auto', mt: 2, mb: 2  }}>
         <TextField
+        
+        required
           id="username"
           label="Username"
           variant="outlined"
+          value={email}
+          onChange={(e)=>{setEmail(e.target.value)}}
           sx={{width:'100%' }}
         />
       </Grid>
@@ -45,7 +126,12 @@ const [signUpFlag , setSignUpFlag] = useState(false);
         <TextField
           id="password"
           label="Password"
+          type='password'
+          onChange={(e)=>{setPassword(e.target.value)}}
           variant="outlined"
+          required={true}
+          helperText="iuuuuu"
+          value={password}
           sx={{width:'100%' }}
         />
       </Grid>
@@ -54,7 +140,11 @@ const [signUpFlag , setSignUpFlag] = useState(false);
     {signUpFlag && <Grid container>
       <Grid item xs={10} md={7}  sx={{ width: '100%', margin: 'auto', mt: 2, mb: 2 }}>
         <TextField
-          id="password"
+          id="confirm password"
+          type='password'
+          value={confirmPassword}
+          required
+          onChange={(e)=>{setConfirmPassword(e.target.value)}}
           label="Confirm Password"
           variant="outlined"
           sx={{width:'100%'}}
@@ -66,7 +156,7 @@ const [signUpFlag , setSignUpFlag] = useState(false);
 
     <Grid container>
       <Grid item xs={10} md={7}  sx={{ width: '100%', margin: 'auto', mt: 2, mb: 2 }}>
-      <Button variant='outlined' sx={{width:"100%" , margin:'auto' ,  color:'#9E465B'  , border:'#9E465B solid 1px'  }}>{signUpFlag?'Sign Up':'Log In'}</Button>
+      <Button onClick={handleClick} variant='outlined' sx={{width:"100%" , margin:'auto' ,  color:'#9E465B'  , border:'#9E465B solid 1px'  }}>{signUpFlag?'Sign Up':'Log In'}</Button>
       </Grid>
     </Grid>
 
@@ -80,7 +170,7 @@ const [signUpFlag , setSignUpFlag] = useState(false);
 
     <Grid container>
       <Grid item xs={10} md={7}  sx={{ width: '100%', margin: 'auto', mt: 2, mb: 2 }}>
-      <Button variant='outlined' sx={{width:"100%" , margin:'auto' ,  color:'#9E465B'  , border:'#9E465B solid 1px'  }}>Log In With Google</Button>
+      <Button onClick={handleGoogleClick} variant='outlined' sx={{width:"100%" , margin:'auto' ,  color:'#9E465B'  , border:'#9E465B solid 1px'  }}>Log In With Google</Button>
       </Grid>
     </Grid>
 
