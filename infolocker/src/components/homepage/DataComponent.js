@@ -8,14 +8,16 @@ import DeleteIcon from '@mui/icons-material/DeleteTwoTone';
 import {Navigate, useNavigate} from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { deleteData } from '../../asyncFunctions';
-function DataComponent({label,value,type,docId,handleDelete}) {
+function DataComponent({label,value,type,docId,handleDelete,url}) {
     const userId=useSelector((state)=>state.loginData[0].id)
     const navigate = useNavigate();
     const handleClick=()=>{
-        navigator.clipboard.writeText("hello")
-        if(type==="file"){
+        if(type==="files"){
+            console.log(url)
+            window.open(url)
             console.log("downoad")
         }else{
+            navigator.clipboard.writeText("hello")
             console.log("copy")
         }
     }

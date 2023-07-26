@@ -1,4 +1,5 @@
 import { doc, setDoc,updateDoc ,collection,addDoc,getDoc,getDocs,deleteDoc} from "firebase/firestore"; 
+import { getStorage, ref, uploadBytes,getDownloadURL } from "firebase/storage";
 import { db } from "./firebase";
 
 // create object when user logs in
@@ -13,15 +14,31 @@ export const postUserEnteredData=async(label,value,uid,type,docId,edit)=>{
   console.log(docId,"conoleeee")
     try {
         if(!edit){
-          const docRef=await addDoc(collection(db,"Data",uid,type),{
-            label:label,
-            value:value
-        })
+          if(type==="files"){
+            const docRef=await addDoc(collection(db,"Data",uid,type),{
+              label:label,
+              value:value.fileName,
+              url:value.url
+          })
+          }else{
+            const docRef=await addDoc(collection(db,"Data",uid,type),{
+              label:label,
+              value:value
+          })
+          }
         }else{
-          const docRef=await setDoc(doc(db,"Data",uid,type,docId),{
-            label:label,
-            value:value
-        })
+          if(type==="files"){
+            const docRef=await setDoc(doc(db,"Data",uid,type,docId),{
+              label:label,
+              value:value.fileName,
+              url:value.url
+          })
+          }else{
+            const docRef=await setDoc(doc(db,"Data",uid,type,docId),{
+              label:label,
+              value:value
+          })
+          }
         }
       } catch (e) {
         console.error("Error adding document: ", e);
@@ -68,4 +85,45 @@ return {
     links:linksCollection,
     files:filesCollection
 }
+}
+
+
+
+export const uploadFileData=async (uid,type,docId,edit,file,label)=>{
+
+  // Create a root reference
+  const storage = getStorage();
+  
+  // Create a reference to 'mountains.jpg'
+  const fileRef = ref(storage,`${uid}/${file.name}`);
+  
+  // Create a reference to 'images/mountains.jpg'
+  // const uploadTask = uploadBytesResumable(fileRef, file);
+  
+  await uploadBytes(fileRef, file).then((snapshot) => {
+    console.log(snapshot)
+    console.log('Uploaded a blob or file!');
+  });
+  getDownloadURL(fileRef)
+  .then((url) => {
+    console.log(url)
+    postUserEnteredData(label,{fileName:file.name,url:url},uid,type,docId,edit)
+    // `url` is the download URL for 'images/stars.jpg'
+
+    // // This can be downloaded directly:
+    // const xhr = new XMLHttpRequest();
+    // xhr.responseType = 'blob';
+    // xhr.onload = (event) => {
+    //   const blob = xhr.response;
+    // };
+    // xhr.open('GET', url);
+    // xhr.send();
+
+    // // Or inserted into an <img> element
+    // const img = document.getElementById('myimg');
+    // img.setAttribute('src', url);
+  })
+  .catch((error) => {
+    // Handle any errors
+  });
 }

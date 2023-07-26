@@ -5,12 +5,13 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button, Typography , Grid } from '@mui/material';
 import Navbar from "../Navbar"
-import { postUserEnteredData } from '../../asyncFunctions';
+import { postUserEnteredData, uploadFileData } from '../../asyncFunctions';
 import {useSelector} from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 
 export default function DataForm() {
 const [signUpFlag , setSignUpFlag] = useState(false); 
+const [file,setFile]=useState(null)
 const location = useLocation();
 const navigate=useNavigate()
 // Access the data from the state object
@@ -24,8 +25,11 @@ const edit=receivedData.edit
 const action=receivedData.label.length!==0?"Edit":"Enter";
 
 const handleClick=async ()=>{
-  console.log(docId)
-  postUserEnteredData(labelData,valueData,userId,type,docId,edit)
+  if(type==="files"){
+  uploadFileData(userId,type,docId,edit,file,labelData)
+  }else{
+    postUserEnteredData(labelData,valueData,userId,type,docId,edit)
+  }
   navigate("/profile")
 }
 
@@ -82,7 +86,7 @@ const handleClick=async ()=>{
       <Grid item xs={10} md={7}  sx={{ width: '100%', margin: 'auto', mt: 2, mb: 2 }}>
         <TextField
         type='file'
-          onChange={(e)=>{setValueData(e.target.value)}}
+          onChange={(e)=>{setFile(e.target.files[0])}}
           variant="outlined"
           sx={{width:'100%' }}
           // value = {valueData}

@@ -59,7 +59,7 @@ const [filesData,setFilesData]=useState([])
           <Grid container spacing={2} sx={{marginTop:3}}>
           {filesData.length>0 ? filesData.map((dataa)=>{
                     return(
-                    <DataComponent label={dataa.label} value={dataa.value} type="files" docId={dataa.docId} />
+                    <DataComponent label={dataa.label} value={dataa.value} url={dataa.url} type="files" docId={dataa.docId} />
                    ); }
               ):<div>No Files at the moment</div>}
             </Grid>
