@@ -12,6 +12,7 @@ import {  signOut ,createUserWithEmailAndPassword,signInWithEmailAndPassword} fr
 import store from '../../store/store';
 import {loginSliceActions} from '../../store/loginSlice';
 import {useDispatch} from 'react-redux';
+import { createUserData } from '../../asyncFunctions';
 
 
 export default function LoginForm() {
@@ -56,6 +57,7 @@ else {
   // Signed in 
   const user = userCredential.user;
   console.log(user.uid)
+  createUserData(user.uid);
   dispatch(loginSliceActions.login({id:user.uid}));
   navigate("/profile")
   // ...
@@ -78,6 +80,7 @@ signInWithPopup(auth, provider)
     // The signed-in user info.
     const user = result.user;
     console.log(user.uid);
+    createUserData(user.uid)
     dispatch(loginSliceActions.login({id:user.uid}));
     navigate("/profile")
     // IdP data available using getAdditionalUserInfo(result)

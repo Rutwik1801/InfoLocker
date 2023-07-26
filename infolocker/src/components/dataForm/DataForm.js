@@ -5,16 +5,23 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button, Typography , Grid } from '@mui/material';
 import Navbar from "../Navbar"
+import { postUserEnteredData } from '../../asyncFunctions';
+import {useSelector} from 'react-redux'
 export default function DataForm() {
 const [signUpFlag , setSignUpFlag] = useState(false); 
 const location = useLocation();
 
 // Access the data from the state object
+const userId=useSelector((state)=>state.loginData[0].id)
 const receivedData = location.state.data;
 const [labelData , setLabelData] = useState(receivedData.label);
 const [valueData , setValueData] = useState(receivedData.value);
 const type = receivedData.type;
 const action=receivedData.label.length!==0?"Edit":"Enter";
+
+const handleClick=async ()=>{
+  postUserEnteredData(labelData,valueData,userId,type)
+}
 
   return (
     <div>
@@ -80,7 +87,7 @@ const action=receivedData.label.length!==0?"Edit":"Enter";
 
     <Grid container>
       <Grid item xs={10} md={7}  sx={{ width: '100%', margin: 'auto', mt: 2, mb: 2 }}>
-      <Button variant='outlined' sx={{width:"100%" , margin:'auto' ,  color:'#9E465B'  , border:'#9E465B solid 1px'  }} >Save Data</Button>
+      <Button onClick={handleClick} variant='outlined' sx={{width:"100%" , margin:'auto' ,  color:'#9E465B'  , border:'#9E465B solid 1px'  }} >Save Data</Button>
       </Grid>
     </Grid>
 
