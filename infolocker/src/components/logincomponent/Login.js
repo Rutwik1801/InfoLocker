@@ -6,6 +6,7 @@ import { Grid, Box , Container  } from '@mui/material';
 import Navbar from '../Navbar';
 
 function Login() {
+  console.log("Login is Redirected");
   return (
    <div>
     <Navbar />

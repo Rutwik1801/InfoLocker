@@ -9,9 +9,15 @@ import app from '../../firebase';
 import firebase from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {  signOut ,createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth";
+import store from '../../store/store';
+import {loginSliceActions} from '../../store/loginSlice';
+import {useDispatch} from 'react-redux';
 
 
 export default function LoginForm() {
+const dispatch = useDispatch();
+
+
 const [signUpFlag , setSignUpFlag] = useState(false); 
 
 
@@ -50,6 +56,8 @@ else {
   // Signed in 
   const user = userCredential.user;
   console.log(user.uid)
+  dispatch(loginSliceActions.login({id:user.uid}));
+  navigate("/profile")
   // ...
 })
 .catch((error) => {
@@ -69,7 +77,8 @@ signInWithPopup(auth, provider)
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-    console.log(user)
+    console.log(user.uid);
+    dispatch(loginSliceActions.login({id:user.uid}));
     navigate("/profile")
     // IdP data available using getAdditionalUserInfo(result)
     // ...

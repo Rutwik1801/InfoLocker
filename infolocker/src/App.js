@@ -5,6 +5,7 @@ import {BrowserRouter , Routes  , Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import LandingPage from './components/LandingPage';
+import { useSelector } from 'react-redux';
 
 import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@mui/material';
@@ -12,9 +13,12 @@ import HomePage from "./components/homepage/HomePage";
 import DataForm from "./components/dataForm/DataForm";
 import { useState } from "react";
 
+
+import {login} from './store/loginSlice';
+import ProtectedRoutes from './components/typeOfRoute/ProtectedRoutes';
+
 const customTheme = createTheme({
 
- 
 
   typography: {
     fontFamily: 'Roboto', // Replace 'Your Desired Font' with your preferred font
@@ -28,22 +32,43 @@ const customTheme = createTheme({
 
 
 function App() {
-
+  const items = useSelector((state) => state.loginData)
+  console.log(items);
 
   return (
 
+
     <BrowserRouter>
     {/* <ThemeProvider theme={customTheme}> */}
+
+    
     <BackgroundWrapper variantt="blue">
-    <Routes>
-        <Route path="/" element={<LandingPage/>} />
-        <Route path="/login" element={<Login  />} />
-        <Route path="/profile" element={<HomePage />} />
-        <Route path="/dataForm" element={<DataForm />} />
-      </Routes>
+    
+
+
+
+      
+        <Routes>
+        <Route  path="/" element={<LandingPage/>} />
+        <Route  path="/login" element={<Login/>} />
+        </Routes>:
+        <Routes>
+             <Route exact path="/profile" element={<ProtectedRoutes><HomePage/></ProtectedRoutes>} />
+        <Route exact path="/dataForm" element={<ProtectedRoutes><DataForm /></ProtectedRoutes>} />
+        </Routes>
+     
+     
+
+      
+
+
+        
+      
       </BackgroundWrapper>
     {/* </ThemeProvider> */}
+    
     </BrowserRouter>
+   
   );
 }
 
