@@ -11,19 +11,19 @@ import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@mui/material';
 import HomePage from "./components/homepage/HomePage";
 import DataForm from "./components/dataForm/DataForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 import {login} from './store/loginSlice';
 import ProtectedRoutes from './components/typeOfRoute/ProtectedRoutes';
 
-const customTheme = createTheme({
+// const customTheme = createTheme({
 
 
-  typography: {
-    fontFamily: 'Roboto', // Replace 'Your Desired Font' with your preferred font
-  },
-});
+//   typography: {
+//     fontFamily: 'Roboto', // Replace 'Your Desired Font' with your preferred font
+//   },
+// });
 
 
 
@@ -32,8 +32,7 @@ const customTheme = createTheme({
 
 
 function App() {
-  const items = useSelector((state) => state.loginData)
-  console.log(items);
+
 
   return (
 
@@ -51,7 +50,7 @@ function App() {
         <Routes>
         <Route  path="/" element={<LandingPage/>} />
         <Route  path="/login" element={<Login/>} />
-        </Routes>:
+        </Routes>
         <Routes>
              <Route exact path="/profile" element={<ProtectedRoutes><HomePage/></ProtectedRoutes>} />
         <Route exact path="/dataForm" element={<ProtectedRoutes><DataForm /></ProtectedRoutes>} />

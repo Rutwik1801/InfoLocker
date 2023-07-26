@@ -5,9 +5,11 @@ import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/FileCopyTwoTone';
 import EditIcon from '@mui/icons-material/EditTwoTone';
 import DeleteIcon from '@mui/icons-material/DeleteTwoTone';
-import {useNavigate} from 'react-router-dom'
-
-function DataComponent({label,value,type}) {
+import {Navigate, useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import { deleteData } from '../../asyncFunctions';
+function DataComponent({label,value,type,docId,handleDelete}) {
+    const userId=useSelector((state)=>state.loginData[0].id)
     const navigate = useNavigate();
     const handleClick=()=>{
         navigator.clipboard.writeText("hello")
@@ -18,8 +20,10 @@ function DataComponent({label,value,type}) {
         }
     }
     const handleEditClick = (e)=>{
-       console.log(type)
-       navigate("/dataForm" , { state: { data: {label , value,type} } });
+       navigate("/dataForm" , { state: { data: {label , value,type,docId,edit:true} } });
+    }
+    const handleDeleteClick=()=>{
+     handleDelete(userId,type,docId)
     }
    
   return (
@@ -35,9 +39,9 @@ readOnly:true,
 endAdornment: (
     <div style={{display:"flex"}}>
 <IconButton sx={{color:"#9E465B"}} onClick={handleEditClick}>
-    <EditIcon />
+    <EditIcon docId={docId} />
 </IconButton>
-<IconButton sx={{color:"#9E465B"}} onClick={handleClick}>
+<IconButton sx={{color:"#9E465B"}} onClick={handleDeleteClick}>
     <DeleteIcon />
 </IconButton>
 <IconButton sx={{color:"#9E465B"}} onClick={handleClick}>

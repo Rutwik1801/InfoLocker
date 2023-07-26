@@ -5,7 +5,7 @@ import React from 'react'
 function Header({type}) {
   const navigate = useNavigate();
 const handleAdd = ()=>{
-  navigate("/dataForm" , {state:{data:{label:'' , value:'' ,type}}});
+  navigate("/dataForm" , {state:{data:{label:'' , value:'' ,type,edit:false}}});
 }
 
 

@@ -7,20 +7,26 @@ import { Button, Typography , Grid } from '@mui/material';
 import Navbar from "../Navbar"
 import { postUserEnteredData } from '../../asyncFunctions';
 import {useSelector} from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+
 export default function DataForm() {
 const [signUpFlag , setSignUpFlag] = useState(false); 
 const location = useLocation();
-
+const navigate=useNavigate()
 // Access the data from the state object
 const userId=useSelector((state)=>state.loginData[0].id)
 const receivedData = location.state.data;
 const [labelData , setLabelData] = useState(receivedData.label);
 const [valueData , setValueData] = useState(receivedData.value);
 const type = receivedData.type;
+const docId=receivedData.docId
+const edit=receivedData.edit
 const action=receivedData.label.length!==0?"Edit":"Enter";
 
 const handleClick=async ()=>{
-  postUserEnteredData(labelData,valueData,userId,type)
+  console.log(docId)
+  postUserEnteredData(labelData,valueData,userId,type,docId,edit)
+  navigate("/profile")
 }
 
   return (
