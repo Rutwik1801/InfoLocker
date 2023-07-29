@@ -5,6 +5,7 @@ const loginSlice = createSlice({
     initialState: data,
     reducers: {
         login: (state, action) => {
+            localStorage.setItem("userId",action.payload.id)
             console.log(action.payload);
 
             // state[0].id = (action.payload.id);
@@ -15,6 +16,7 @@ const loginSlice = createSlice({
             return temp;
         },
         logout: (state, action) => {
+            localStorage.clear()
             return data;
         }
     }

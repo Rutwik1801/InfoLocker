@@ -4,25 +4,31 @@ import { Box, Container, Grid, TextField } from '@mui/material'
 import Header from './Header'
 import DataComponent from './DataComponent';
 import {dummyData} from "../../utils/data"
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteData, getUserData } from '../../asyncFunctions';
+import AlertComponent from '../alert/AlertComponent';
+import { alertSliceActions } from '../../store/alertSlice';
 
 function HomePage() {
+  const dispatch=useDispatch()
 const [detailsData,setDetailsData]=useState([])
+// const [open,setOpen]=useState(false)
 const [linksData,setLinksData]=useState([])
 const [filesData,setFilesData]=useState([])
-  const userId=useSelector((state)=>state.loginData[0].id)
+  // const alertData=useSelector((state)=>state.alertData)
+  // console.log(alertData)
+  const userId=localStorage.getItem("userId")
 
   const getData=async()=>{
     const resultObject= await getUserData(userId);
-    console.log(resultObject.details)
     setLinksData(resultObject.links)
     setDetailsData(resultObject.details)
     setFilesData(resultObject.files)
     // console.log(detailsData)
   }
-   const handleDelete=async (uid,type,docId)=>{
-     deleteData(uid,type,docId);
+   const handleDelete=async (uid,type,docId,value)=>{
+     deleteData(uid,type,docId,value);
+     dispatch(alertSliceActions.fireTrue({flag:true,alertMessage:"dddddddddddddddddddddddddddddddddd"}))
      getData();
    }
   useEffect( ()=>{
@@ -49,7 +55,7 @@ const [filesData,setFilesData]=useState([])
           <Grid container spacing={2} sx={{marginTop:3}}>
           {linksData.length>0 ? linksData.map((dataa)=>{
                     return(
-                    <DataComponent label={dataa.label} value={dataa.value} type="links" docId={dataa.docId} />
+                    <DataComponent  label={dataa.label} handleDelete={handleDelete} value={dataa.value} type="links" docId={dataa.docId} />
                    ); }
               ):<div>No links at the moment</div>}
             </Grid>
@@ -59,13 +65,14 @@ const [filesData,setFilesData]=useState([])
           <Grid container spacing={2} sx={{marginTop:3}}>
           {filesData.length>0 ? filesData.map((dataa)=>{
                     return(
-                    <DataComponent label={dataa.label} value={dataa.value} url={dataa.url} type="files" docId={dataa.docId} />
+                    <DataComponent label={dataa.label} handleDelete={handleDelete} value={dataa.value} url={dataa.url} type="files" docId={dataa.docId} />
                    ); }
               ):<div>No Files at the moment</div>}
             </Grid>
           </Grid>
         </Box>
         </div>
+        <AlertComponent />
     </div>
   )
 }

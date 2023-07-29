@@ -13,24 +13,43 @@ import store from '../../store/store';
 import {loginSliceActions} from '../../store/loginSlice';
 import {useDispatch} from 'react-redux';
 import { createUserData } from '../../asyncFunctions';
+import { alertSliceActions } from '../../store/alertSlice';
 
 
 export default function LoginForm() {
+
+
 const dispatch = useDispatch();
-
-
 const [signUpFlag , setSignUpFlag] = useState(false); 
-
-
 const [email,setEmail]=useState("");
 const [password,setPassword]=useState("");
 const [confirmPassword,setConfirmPassword]=useState("");
-
+const [emailError, setEmailError] = useState('');
+const [passwordError, setPasswordError] = useState('');
 const navigate=useNavigate();
 const auth=getAuth()
 const provider = new GoogleAuthProvider();
+
+
+
+
+
 const handleClick=async ()=>{
-  console.log(signUpFlag)
+
+  // email validation
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email.match(emailPattern)) {
+    setEmailError('Invalid email address');
+    return;
+  }
+  // password length validation
+  if (password.length < 6) {
+    setPasswordError('Password must be at least 6 characters long');
+    return ;
+  }
+  setPasswordError('');
+  setEmailError('');
+
   if(signUpFlag){
     if(password===confirmPassword){
 
@@ -43,12 +62,16 @@ const handleClick=async ()=>{
       })
       .catch((error) => {
           console.log(error)
+          // dispatch(alertSliceActions.fireTrue({flag:true,alertMessage:error.message}))
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
       });
 
       
+  }else{
+    setPasswordError("passwords do not match");
+    return;
   }
 }
 else {
@@ -126,6 +149,7 @@ signInWithPopup(auth, provider)
           id="username"
           label="Username"
           variant="outlined"
+          helperText={emailError}
           value={email}
           onChange={(e)=>{setEmail(e.target.value)}}
           sx={{width:'100%' }}
@@ -142,7 +166,7 @@ signInWithPopup(auth, provider)
           onChange={(e)=>{setPassword(e.target.value)}}
           variant="outlined"
           required={true}
-          helperText="iuuuuu"
+          helperText={passwordError}
           value={password}
           sx={{width:'100%' }}
         />

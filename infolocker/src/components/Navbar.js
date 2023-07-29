@@ -41,6 +41,10 @@ React.useEffect(()=>{
     setAnchorElUser(null);
   };
 
+  const handleClick=()=>{
+    localStorage.clear()
+  }
+
   return (
     <AppBar position="static" sx={{background:'none',boxShadow:'none'}}>
       <Container maxWidth="xl" >
@@ -95,7 +99,7 @@ React.useEffect(()=>{
           </Box>
 
           <Box sx={{ flexGrow: 0,position:'fixed',top:40,right:40 }}>
-            <Button variant='outlined' sx={{color:'#9E465B',borderColor:'#9E465B',letterSpacing:2}}>
+            <Button onClick={handleClick} variant='outlined' sx={{color:'#9E465B',borderColor:'#9E465B',letterSpacing:2}}>
               <Link style={{textDecoration:'none',color:'inherit'}} to='/login'>{isLoggedIn?"Log Out":"Log In"}</Link>
             </Button>
           </Box>

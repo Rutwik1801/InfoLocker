@@ -1,5 +1,5 @@
 import { doc, setDoc,updateDoc ,collection,addDoc,getDoc,getDocs,deleteDoc} from "firebase/firestore"; 
-import { getStorage, ref, uploadBytes,getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes,getDownloadURL,deleteObject } from "firebase/storage";
 import { db } from "./firebase";
 
 // create object when user logs in
@@ -45,11 +45,28 @@ export const postUserEnteredData=async(label,value,uid,type,docId,edit)=>{
       }
 
 }
-
-export const deleteData=async (uid,type,docId)=>{
+// delete user data
+export const deleteData=async (uid,type,docId,value)=>{
   try {
     const docPath = `Data/${uid}/${type}/${docId}`;
     const res = await deleteDoc(doc(db, docPath));
+    if(type==="files"){
+      // file delete code
+      const storage = getStorage();
+
+      // Create a reference to the file to delete
+      const deleteRef = ref(storage, `${uid}/${value}`);
+      
+      // Delete the file
+      deleteObject(deleteRef).then(() => {
+        // File deleted successfully
+        console.log("deleted success")
+      }).catch((error) => {
+        // Uh-oh, an error occurred!
+        console.log(error)
+      });
+
+    }
     console.log("Document successfully deleted:", res);
   } catch (err) {
     console.error("Error deleting the document:", err);

@@ -8,6 +8,7 @@ import Navbar from "../Navbar"
 import { postUserEnteredData, uploadFileData } from '../../asyncFunctions';
 import {useSelector} from 'react-redux'
 import { useNavigate } from 'react-router-dom';
+import AlertComponent from '../alert/AlertComponent';
 
 export default function DataForm() {
 const [signUpFlag , setSignUpFlag] = useState(false); 
@@ -15,11 +16,14 @@ const [file,setFile]=useState(null)
 const location = useLocation();
 const navigate=useNavigate()
 // Access the data from the state object
-const userId=useSelector((state)=>state.loginData[0].id)
+// const userId=useSelector((state)=>state.loginData[0].id)
+const userId=localStorage.getItem("userId")
 const receivedData = location.state.data;
+console.log(receivedData)
 const [labelData , setLabelData] = useState(receivedData.label);
 const [valueData , setValueData] = useState(receivedData.value);
 const type = receivedData.type;
+const setOpen=receivedData.setOpen
 const docId=receivedData.docId
 const edit=receivedData.edit
 const action=receivedData.label.length!==0?"Edit":"Enter";

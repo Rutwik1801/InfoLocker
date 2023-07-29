@@ -6,10 +6,13 @@ import ContentCopyIcon from '@mui/icons-material/FileCopyTwoTone';
 import EditIcon from '@mui/icons-material/EditTwoTone';
 import DeleteIcon from '@mui/icons-material/DeleteTwoTone';
 import {Navigate, useNavigate} from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteData } from '../../asyncFunctions';
-function DataComponent({label,value,type,docId,handleDelete,url}) {
-    const userId=useSelector((state)=>state.loginData[0].id)
+import { alertSliceActions } from '../../store/alertSlice';
+function DataComponent({label,value,type,docId,handleDelete,url,setOpen}) {
+    // const userId=useSelector((state)=>state.loginData[0].id)
+    const disaptch=useDispatch();
+    const userId=localStorage.getItem("userId")
     const navigate = useNavigate();
     const handleClick=()=>{
         if(type==="files"){
@@ -17,7 +20,7 @@ function DataComponent({label,value,type,docId,handleDelete,url}) {
             window.open(url)
             console.log("downoad")
         }else{
-            navigator.clipboard.writeText("hello")
+            navigator.clipboard.writeText(value)
             console.log("copy")
         }
     }
@@ -25,7 +28,8 @@ function DataComponent({label,value,type,docId,handleDelete,url}) {
        navigate("/dataForm" , { state: { data: {label , value,type,docId,edit:true} } });
     }
     const handleDeleteClick=()=>{
-     handleDelete(userId,type,docId)
+     handleDelete(userId,type,docId,value)
+    disaptch(alertSliceActions.fireTrue({flag:true,message:"deleted successfullyssssssss"}))
     }
    
   return (

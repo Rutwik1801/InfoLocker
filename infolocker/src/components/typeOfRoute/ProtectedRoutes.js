@@ -8,15 +8,14 @@ function ProtectedRoutes(props) {
 
 
     const items = useSelector((state) => state.loginData[0].id)
+    const userId=localStorage.getItem("userId")
     console.log(items);
 
 
-    if (items === 0) {
-        return <Navigate to = "/login" / >
+    if ( userId) {
+            return props.children;
     } else {
-
-
-        return props.children;
+        return <Navigate to = "/login" / >
     }
 
 }
