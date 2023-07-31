@@ -117,14 +117,17 @@ export const uploadFileData=async (uid,type,docId,edit,file,label)=>{
   // Create a reference to 'images/mountains.jpg'
   // const uploadTask = uploadBytesResumable(fileRef, file);
   
-  await uploadBytes(fileRef, file).then((snapshot) => {
+   uploadBytes(fileRef, file).then((snapshot) => {
     console.log(snapshot)
     console.log('Uploaded a blob or file!');
-  });
+  })
   getDownloadURL(fileRef)
   .then((url) => {
     console.log(url)
     postUserEnteredData(label,{fileName:file.name,url:url},uid,type,docId,edit)
+
+
+
     // `url` is the download URL for 'images/stars.jpg'
 
     // // This can be downloaded directly:

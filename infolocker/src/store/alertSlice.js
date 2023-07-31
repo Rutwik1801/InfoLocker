@@ -11,19 +11,11 @@ const alertSlice = createSlice({
     reducers: {
         fireTrue: (state, action) => {
              state.data=action.payload
-            // state.flag=true
-            // state.alertMessage=action.payload.alertMessage
-            // console.log(current(state))
-            // return state;
-            // return {
-                // flag:true,
-                // alertMessage:action.payload.alertMessage
-            // }
+             console.log("current state:- ",current(state))
         },
         fireFalse: (state, action) => {
- 
-            state.flag=false
-            state.alertMessage=""
+            state.data=action.payload
+            console.log("current state:- ",current(state))
         }
     }
 });

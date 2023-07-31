@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import { Button, Typography , Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import  signUpHandler  from '../../firebase';
+import { deleteUser } from "firebase/auth";
 import app from '../../firebase';
 import firebase from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -57,7 +58,21 @@ const handleClick=async ()=>{
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log(user.uid)
+        console.log(user)
+        if(user.emailVerified===false){
+          setEmailError("enter valid email")
+const currUser = auth.currentUser;
+
+deleteUser(currUser).then(() => {
+  // User deleted.
+  console.log("success")
+}).catch((error) => {
+  // An error ocurred
+  console.log(error)
+  // ...
+});
+          return;
+        }
         // ...
       })
       .catch((error) => {
@@ -79,7 +94,11 @@ else {
 .then((userCredential) => {
   // Signed in 
   const user = userCredential.user;
-  console.log(user.uid)
+  console.log(user)
+  if(user.emailVerified===false){
+    setEmailError("enter valid email")
+    return;
+  }
   createUserData(user.uid);
   dispatch(loginSliceActions.login({id:user.uid}));
   navigate("/profile")
@@ -89,6 +108,7 @@ else {
   console.log(error)
   const errorCode = error.code;
   const errorMessage = error.message;
+  setEmailError(errorMessage.split("(")[1].split(")")[0])
 });
 
 }}
@@ -102,7 +122,11 @@ signInWithPopup(auth, provider)
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-    console.log(user.uid);
+    if(user.emailVerified===false){
+      setEmailError("enter valid email")
+      return;
+    }
+    console.log(user);
     createUserData(user.uid)
     dispatch(loginSliceActions.login({id:user.uid}));
     navigate("/profile")

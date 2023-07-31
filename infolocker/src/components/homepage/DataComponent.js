@@ -11,7 +11,7 @@ import { deleteData } from '../../asyncFunctions';
 import { alertSliceActions } from '../../store/alertSlice';
 function DataComponent({label,value,type,docId,handleDelete,url,setOpen}) {
     // const userId=useSelector((state)=>state.loginData[0].id)
-    const disaptch=useDispatch();
+    const dispatch=useDispatch();
     const userId=localStorage.getItem("userId")
     const navigate = useNavigate();
     const handleClick=()=>{
@@ -21,6 +21,7 @@ function DataComponent({label,value,type,docId,handleDelete,url,setOpen}) {
             console.log("downoad")
         }else{
             navigator.clipboard.writeText(value)
+            dispatch(alertSliceActions.fireTrue({flag:true,alertMessage:`Copied to Clipboard`}));
             console.log("copy")
         }
     }
@@ -29,7 +30,7 @@ function DataComponent({label,value,type,docId,handleDelete,url,setOpen}) {
     }
     const handleDeleteClick=()=>{
      handleDelete(userId,type,docId,value)
-    disaptch(alertSliceActions.fireTrue({flag:true,message:"deleted successfullyssssssss"}))
+    // disaptch(alertSliceActions.fireTrue({flag:true,message:"deleted successfullyssssssss"}))
     }
    
   return (

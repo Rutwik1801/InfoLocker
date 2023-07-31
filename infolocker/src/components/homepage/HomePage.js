@@ -16,7 +16,6 @@ const [detailsData,setDetailsData]=useState([])
 const [linksData,setLinksData]=useState([])
 const [filesData,setFilesData]=useState([])
   // const alertData=useSelector((state)=>state.alertData)
-  // console.log(alertData)
   const userId=localStorage.getItem("userId")
 
   const getData=async()=>{
@@ -24,11 +23,10 @@ const [filesData,setFilesData]=useState([])
     setLinksData(resultObject.links)
     setDetailsData(resultObject.details)
     setFilesData(resultObject.files)
-    // console.log(detailsData)
   }
    const handleDelete=async (uid,type,docId,value)=>{
      deleteData(uid,type,docId,value);
-     dispatch(alertSliceActions.fireTrue({flag:true,alertMessage:"dddddddddddddddddddddddddddddddddd"}))
+     dispatch(alertSliceActions.fireTrue({flag:true,alertMessage:` ${type.substring(0,type.length-1).toUpperCase()} Deleted Successfully`}))
      getData();
    }
   useEffect( ()=>{

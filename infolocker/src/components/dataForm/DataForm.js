@@ -6,9 +6,10 @@ import TextField from '@mui/material/TextField';
 import { Button, Typography , Grid } from '@mui/material';
 import Navbar from "../Navbar"
 import { postUserEnteredData, uploadFileData } from '../../asyncFunctions';
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import AlertComponent from '../alert/AlertComponent';
+import { alertSliceActions } from '../../store/alertSlice';
 
 export default function DataForm() {
 const [signUpFlag , setSignUpFlag] = useState(false); 
@@ -27,14 +28,20 @@ const setOpen=receivedData.setOpen
 const docId=receivedData.docId
 const edit=receivedData.edit
 const action=receivedData.label.length!==0?"Edit":"Enter";
-
+const dispatch=useDispatch()
 const handleClick=async ()=>{
   if(type==="files"){
-  uploadFileData(userId,type,docId,edit,file,labelData)
+     uploadFileData(userId,type,docId,edit,file,labelData)
   }else{
     postUserEnteredData(labelData,valueData,userId,type,docId,edit)
   }
-  navigate("/profile")
+  const messageString=edit?"Edited":"Added";
+  dispatch(alertSliceActions.fireTrue({flag:true,alertMessage:` ${type.substring(0,type.length-1).toUpperCase()} ${messageString} Successfully`}));
+  setTimeout(()=>{
+    navigate("/profile")
+  },3000)
+
+
 }
 
   return (
