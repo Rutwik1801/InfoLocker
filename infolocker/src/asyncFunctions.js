@@ -117,7 +117,7 @@ export const uploadFileData=async (uid,type,docId,edit,file,label)=>{
   // Create a reference to 'images/mountains.jpg'
   // const uploadTask = uploadBytesResumable(fileRef, file);
   
-   uploadBytes(fileRef, file).then((snapshot) => {
+   await uploadBytes(fileRef, file).then((snapshot) => {
     console.log(snapshot)
     console.log('Uploaded a blob or file!');
   })

@@ -37,7 +37,7 @@ function DataComponent({label,value,type,docId,handleDelete,url,setOpen}) {
     <Grid  item xs={12} sm={6}>
     <TextField 
       
-         sx={{boxShadow:"0px 1px 5px rgba(0,0,0,0.1)"}}
+         sx={{boxShadow:"0px 1px 5px rgba(0,0,0,0.1)",backgroundColor:"white",color:"#B9C1D4 !important"}}
               id="outlined-read-only-input"
               label={label}
               defaultValue={value}
@@ -45,13 +45,13 @@ InputProps={{
 readOnly:true,
 endAdornment: (
     <div style={{display:"flex"}}>
-<IconButton sx={{color:"#9E465B"}} onClick={handleEditClick}>
+<IconButton sx={{color:"#0F172A"}} onClick={handleEditClick}>
     <EditIcon docId={docId} />
 </IconButton>
-<IconButton sx={{color:"#9E465B"}} onClick={handleDeleteClick}>
+<IconButton sx={{color:"#0F172A"}} onClick={handleDeleteClick}>
     <DeleteIcon />
 </IconButton>
-<IconButton sx={{color:"#9E465B"}} onClick={handleClick}>
+<IconButton sx={{color:"#0F172A"}} onClick={handleClick}>
     {type==="files"?<DownloadIcon />:<ContentCopyIcon />}
 </IconButton>
     </div>

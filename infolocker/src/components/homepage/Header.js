@@ -11,8 +11,8 @@ const handleAdd = ()=>{
 
   return (
     <Grid sx={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-        <Typography fontSize={24} sx={{letterSpacing:2}}>{type}</Typography>
-        <Button sx={{width:"150px"}} onClick={handleAdd} variant='outlined'>+ Add {type}</Button>
+        <Typography fontSize={24} sx={{letterSpacing:2,color:"#36365F !important"}}>{type.substr(0,1).toUpperCase() + type.substr(1)}</Typography>
+        <Button variant='contained' sx={{width:"150px",backgroundColor:"#AF7EEB !important"}}  onClick={handleAdd}>+ Add {type}</Button>
     </Grid>
   )
 }

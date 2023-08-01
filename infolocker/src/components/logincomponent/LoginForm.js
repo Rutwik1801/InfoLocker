@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useState} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button, Typography , Grid } from '@mui/material';
+import { Button, Typography , Grid, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import  signUpHandler  from '../../firebase';
 import { deleteUser } from "firebase/auth";
@@ -145,16 +145,19 @@ signInWithPopup(auth, provider)
 }
 
   return (
-    <Box
+    <Container
       component="form"
       sx={{
-        paddingTop:4,
-        marginTop:12,
+        width:{xs:"100%",md:"50%"},
+        padding:"30px 10px",
         display:'flex',
         flexDirection:'column',
         margin:'auto' , 
         textAlign:'center' ,
         zIndex:1 , 
+        borderRadius:"8px",
+        boxShadow:"1px 2px 8px rgba(0,0,0,0.4)",
+        backgroundColor:"White"
        
        
       }}
@@ -216,7 +219,7 @@ signInWithPopup(auth, provider)
 
     <Grid container>
       <Grid item xs={10} md={7}  sx={{ width: '100%', margin: 'auto', mt: 2, mb: 2 }}>
-      <Button onClick={handleClick} variant='outlined' sx={{width:"100%" , margin:'auto' ,  color:'#9E465B'  , border:'#9E465B solid 1px'  }}>{signUpFlag?'Sign Up':'Log In'}</Button>
+      <Button onClick={handleClick} variant='contained' sx={{width:"100%" , margin:'auto' , backgroundColor:"#AF7EEB !important",color:"white"  }}>{signUpFlag?'Sign Up':'Log In'}</Button>
       </Grid>
     </Grid>
 
@@ -230,10 +233,10 @@ signInWithPopup(auth, provider)
 
     <Grid container>
       <Grid item xs={10} md={7}  sx={{ width: '100%', margin: 'auto', mt: 2, mb: 2 }}>
-      <Button onClick={handleGoogleClick} variant='outlined' sx={{width:"100%" , margin:'auto' ,  color:'#9E465B'  , border:'#9E465B solid 1px'  }}>Log In With Google</Button>
+      <Button onClick={handleGoogleClick} variant='contained' sx={{width:"100%" , margin:'auto' , backgroundColor:"#AF7EEB !important",color:"white"  }}>Log In With Google</Button>
       </Grid>
     </Grid>
 
-    </Box>
+    </Container>
   );
 }

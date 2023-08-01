@@ -8,8 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteData, getUserData } from '../../asyncFunctions';
 import AlertComponent from '../alert/AlertComponent';
 import { alertSliceActions } from '../../store/alertSlice';
+import Loader from '../loader/Loader';
+import Footer from '../footer/Footer';
 
 function HomePage() {
+  const [isLoading,setIsLoading]=useState(false)
   const dispatch=useDispatch()
 const [detailsData,setDetailsData]=useState([])
 // const [open,setOpen]=useState(false)
@@ -30,13 +33,17 @@ const [filesData,setFilesData]=useState([])
      getData();
    }
   useEffect( ()=>{
+    setIsLoading(true)
  getData()
+ setIsLoading(false)
   },[])
   return (
     <div>
+      {isLoading?<Loader />:
+    <div style={{minHeight:"100vh"}}>
         <Navbar isLoggedIn={true}/>
-        <div style={{padding:"30px"}}>
-        <Box sx={{background:'none',width:{sx:"100%",md:"60%"},border:"1px solid black",padding:4}}>
+        <div style={{padding:"30px",display:"flex",justifyContent:"center"}} >
+        <Box sx={{background:'none',width:{sx:"100%",md:"60%"},boxShadow:"1px 2px 8px rgba(0,0,0,0.4)",padding:4,backgroundColor:"#ffffff",borderRadius:"8px"}}>
           <Grid>
             <Header type="details"/>
             <Grid container spacing={2} sx={{marginTop:3}}>
@@ -71,6 +78,8 @@ const [filesData,setFilesData]=useState([])
         </Box>
         </div>
         <AlertComponent />
+    </div>}
+    <Footer />
     </div>
   )
 }

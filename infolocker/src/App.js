@@ -16,7 +16,11 @@ import { useEffect, useState } from "react";
 
 import {login} from './store/loginSlice';
 import ProtectedRoutes from './components/typeOfRoute/ProtectedRoutes';
-
+import Footer from "./components/footer/Footer";
+import AboutUs from "./components/AboutUs";
+import HowToUse from "./components/HowToUse";
+import TnC from "./TnC"
+import PrivacyPolicy from "./PrivacyPolicy";
 // const customTheme = createTheme({
 
 
@@ -50,6 +54,10 @@ function App() {
         <Routes>
         <Route  path="/" element={<LandingPage/>} />
         <Route  path="/login" element={<Login/>} />
+        <Route  path="/aboutus" element={<AboutUs/>} />
+        <Route  path="/howtouse" element={<HowToUse/>} />
+        <Route  path="/tnc" element={<TnC/>} />
+        <Route  path="/privacy" element={<PrivacyPolicy/>} />
         </Routes>
         <Routes>
              <Route exact path="/profile" element={<ProtectedRoutes><HomePage/></ProtectedRoutes>} />
@@ -58,8 +66,7 @@ function App() {
      
      
 
-      
-
+  
 
         
       

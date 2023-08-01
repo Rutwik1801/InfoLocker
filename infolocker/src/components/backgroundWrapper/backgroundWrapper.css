@@ -3,7 +3,7 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-attachment: fixed;
-    /* height: 100vh; */
+    height: 120vh;
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -13,12 +13,12 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
-    z-index: -1;
+    background-color: #E3E9FF;
 }
-.bg-red {
+/* .bg-red {
     background-image: url(../../assets/bg-red.png);
 }
 
 .bg-blue{
     background-image: url(../../assets/bg-blue.png);
-}
+} */
