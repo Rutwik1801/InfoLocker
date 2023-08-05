@@ -48,7 +48,8 @@ React.useEffect(()=>{
   return (
     <AppBar position="static" sx={{background:'none',boxShadow:'none'}}>
       <Container maxWidth="xl" >
-        <Toolbar disableGutters >
+        <Toolbar disableGutters sx={{justifyContent:"space-between"}} >
+        <img src={Logo} sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} style={{height:"120px",width:"120px"}}/>
           <Box sx={{  display: { xs: 'block', md: 'none' } }}>
             <IconButton
               size="large"
@@ -79,13 +80,21 @@ React.useEffect(()=>{
               }}
             >
               {pages.map((page) => (
-                <MenuItem  key={page} onClick={handleCloseNavMenu} sx={{paddingLeft:12}}>
+                <MenuItem  key={page} onClick={handleCloseNavMenu} >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
+                              <MenuItem  onClick={handleCloseNavMenu} >
+                  <Typography textAlign="center">{isLoggedIn?"Log Out":"Log In"}</Typography>
+                </MenuItem>
+                        {/* <Box sx={{ flexGrow: 0 }}>
+            <Button onClick={handleClick} variant='outlined' sx={{color:'#9E465B',borderColor:'#9E465B',letterSpacing:2}}>
+              <Link style={{textDecoration:'none',color:'inherit'}} to='/login'>{isLoggedIn?"Log Out":"Log In"}</Link>
+            </Button>
+          </Box> */}
             </Menu>
           </Box>
-          <img src={Logo} sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} style={{height:"120px",width:"120px"}}/>
+          {/* <img src={Logo} sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} style={{height:"120px",width:"120px"}}/> */}
           <Box sx={{ flexGrow: 1, display:{xs:'none',md:'flex'},justifyContent:'center',fontFamily: 'Roboto' }}>
             {pages.map((page) => (
               <Button
@@ -98,8 +107,8 @@ React.useEffect(()=>{
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0,position:'fixed',top:40,right:40 }}>
-            <Button onClick={handleClick} variant='outlined' sx={{color:'#9E465B',borderColor:'#9E465B',letterSpacing:2}}>
+          <Box sx={{ display: { xs: 'none !important', md: 'block !important' } ,flexGrow: 0 }}>
+            <Button onClick={handleClick} variant='contained' sx={{width:"100%" , margin:'auto' , backgroundColor:"#AF7EEB !important",color:"white",letterSpacing:2}}>
               <Link style={{textDecoration:'none',color:'inherit'}} to='/login'>{isLoggedIn?"Log Out":"Log In"}</Link>
             </Button>
           </Box>

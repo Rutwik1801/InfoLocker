@@ -14,6 +14,8 @@ import Loader from '../loader/Loader';
 import Footer from '../footer/Footer';
 
 export default function DataForm() {
+  const [labelError,setLabelError]=useState("")
+  const [valueError,setValueError]=useState("")
   const [isLoading,setIsLoading]=useState(false)
 const [signUpFlag , setSignUpFlag] = useState(false); 
 const [file,setFile]=useState(null)
@@ -33,9 +35,22 @@ const edit=receivedData.edit
 const action=receivedData.label.length!==0?"Edit":"Enter";
 const dispatch=useDispatch()
 const handleClick=async ()=>{
+  if(!labelData){
+    setLabelError("Please enter valid details")
+    return;
+  }
+
   if(type==="files"){
+    if(!file){
+      setValueError("Please select a valid file")
+      return;
+    }
      uploadFileData(userId,type,docId,edit,file,labelData)
   }else{
+    if(!valueData){
+      setValueError("Please enter valid details")
+      return;
+    }
     postUserEnteredData(labelData,valueData,userId,type,docId,edit)
   }
   const messageString=edit?"Edited":"Added";
@@ -82,6 +97,7 @@ const handleClick=async ()=>{
     <Grid container > 
     <Grid item xs={10} md={7} sx={{  width: '100%', margin: 'auto', mt: 2, mb: 2  }}>
       <TextField
+      helperText={labelError}
         onChange={(e)=>{setLabelData(e.target.value)
         
         }}
@@ -97,6 +113,7 @@ const handleClick=async ()=>{
     <Grid item xs={10} md={7}  sx={{ width: '100%', margin: 'auto', mt: 2, mb: 2 }}>
       <TextField
         onChange={(e)=>{setValueData(e.target.value)}}
+        helperText={valueError}
         label="Value"
         variant="outlined"
         sx={{width:'100%' }}
@@ -107,6 +124,7 @@ const handleClick=async ()=>{
   {type==="files" &&<Grid container>
     <Grid item xs={10} md={7}  sx={{ width: '100%', margin: 'auto', mt: 2, mb: 2 }}>
       <TextField
+      helperText={valueError}
       type='file'
         onChange={(e)=>{setFile(e.target.files[0])}}
         variant="outlined"

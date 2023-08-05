@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from './Navbar'
-import { Typography,Container } from '@mui/material';
+import { Typography,Container,Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import Footer from './footer/Footer';
 function LandingPage() {
   return (
@@ -19,6 +20,9 @@ function LandingPage() {
                 <Typography fontSize={20} sx={{color:'#3C3D5C'}}>
                    with InfoLocker.
                 </Typography>
+                <Button  variant='outlined' sx={{width:"35%",marginTop:6, backgroundColor:"#AF7EEB !important",borderColor:"#AF7EEB",color:"white",letterSpacing:2}}>
+              <Link style={{textDecoration:'none',color:'inherit'}} to='/login'>Get Started</Link>
+            </Button>
             </Container>
         {/* <img src={background} style={{position:"absolute",right:-40,top:-80,height:"140vh"}} /> */}
         <Footer />
