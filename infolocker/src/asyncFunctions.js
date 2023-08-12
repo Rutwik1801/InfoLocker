@@ -120,7 +120,8 @@ export const getUserData = async(uid) => {
     let detailsCollection = []
     let linksCollection = []
     let filesCollection = []
-    if (docSnap.exists()) {
+    console.log(docSnap.exists(),"thissssssssss")
+    // if (docSnap.exists()) {
         //   console.log("Document data:", docSnap.data());
         detailsCollectionSnap.forEach(doc => {
             detailsCollection.push({...doc.data(), docId: doc.id })
@@ -132,12 +133,12 @@ export const getUserData = async(uid) => {
             filesCollection.push({...doc.data(), docId: doc.id })
         })
 
-    } else {
+    // } else {
         // docSnap.data() will be undefined in this case
         console.log("No such document!");
         // console.log("got the data")
         // window.location.href="/login"
-    }
+    // }
     return {
         details: detailsCollection,
         links: linksCollection,

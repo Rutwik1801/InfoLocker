@@ -1,22 +1,17 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyA4mVHeD-xOWP171IlV9qXiUZoAyC0taVg",
-    authDomain: "infolocker-c5233.firebaseapp.com",
-    projectId: "infolocker-c5233",
-    storageBucket: "infolocker-c5233.appspot.com",
-    messagingSenderId: "947998745531",
-    appId: "1:947998745531:web:70e6e7263d08f932de5a9e"
+  apiKey: "AIzaSyDgJPzoiwP570lL7s_fJtKq3Hm6G6nx3jA",
+  authDomain: "infolocker-2824b.firebaseapp.com",
+  projectId: "infolocker-2824b",
+  storageBucket: "infolocker-2824b.appspot.com",
+  messagingSenderId: "135525225855",
+  appId: "1:135525225855:web:76dcb9b91ba987853db64a"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
 export const db = getFirestore(app);
