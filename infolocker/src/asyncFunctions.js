@@ -3,15 +3,37 @@ import { getStorage, ref, uploadBytes,getDownloadURL,deleteObject } from "fireba
 import { db } from "./firebase";
 
 // create object when user logs in
-export const createUserData=async(uid)=>{
-    const docRef=await setDoc(doc(db,"Data",uid),{
+export const postUserId=async(uid)=>{
+   
+    const docRef=await setDoc(doc(db,"users",uid),{
         userId:uid
     })
 }
 
+ const checkUserId=async (uid)=>{
+  console.log(uid,"yesssssssssssssssssssssssssss")
+  const docRef = doc(db, "users", uid);
+const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+  console.log("Document data:", docSnap.data());
+  return true;
+} else {
+  // docSnap.data() will be undefined in this case
+  console.log("No such document!");
+  localStorage.clear();
+  window.location.href="/login"
+  return false;
+}
+}
+
 // send the dataform data
 export const postUserEnteredData=async(label,value,uid,type,docId,edit)=>{
-  console.log(docId,"conoleeee")
+  const res=await checkUserId(uid)
+  console.log("res",res)
+    if(res===false){
+      return;
+     }
     try {
         if(!edit){
           if(type==="files"){
@@ -47,6 +69,11 @@ export const postUserEnteredData=async(label,value,uid,type,docId,edit)=>{
 }
 // delete user data
 export const deleteData=async (uid,type,docId,value)=>{
+  const res=await checkUserId(uid)
+  console.log("res",res)
+    if(res===false){
+      return;
+     }
   try {
     const docPath = `Data/${uid}/${type}/${docId}`;
     const res = await deleteDoc(doc(db, docPath));
@@ -72,7 +99,19 @@ export const deleteData=async (uid,type,docId,value)=>{
     console.error("Error deleting the document:", err);
   }
 }
+
+
+
+
+// GET => USER DATA
+
+
 export const getUserData=async(uid)=>{
+const res=await checkUserId(uid)
+console.log("res",res)
+  if(res===false){
+    return;
+   }
     const docRef = doc(db, "Data", uid);
 const docSnap = await getDoc(docRef);
 const detailsCollectionSnap=await getDocs(collection(db, "Data", uid,"details"))
@@ -96,6 +135,8 @@ linksCollectionSnap.forEach(doc=>{
 } else {
   // docSnap.data() will be undefined in this case
   console.log("No such document!");
+  // console.log("got the data")
+  // window.location.href="/login"
 }
 return {
     details:detailsCollection,
@@ -107,7 +148,11 @@ return {
 
 
 export const uploadFileData=async (uid,type,docId,edit,file,label)=>{
-
+  const res=await checkUserId(uid)
+  console.log("res",res)
+    if(res===false){
+      return;
+     }
   // Create a root reference
   const storage = getStorage();
   

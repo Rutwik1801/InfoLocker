@@ -17,13 +17,14 @@ import Logo from "../assets/logo.svg"
 import { landingPageNavbarData, loginNavbarData } from '../utils/data';
 
 
-
-function Navbar({isLoggedIn}) {
+function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [pages,setPages]=useState([]);
+  const userId=localStorage.getItem("userId")
+  const isLoggedIn=userId?true:false;
 React.useEffect(()=>{
-  isLoggedIn?setPages(loginNavbarData):setPages(landingPageNavbarData);
+  userId?setPages(loginNavbarData):setPages(landingPageNavbarData);
 },[])
 
   const handleOpenNavMenu = (event) => {
@@ -49,7 +50,9 @@ React.useEffect(()=>{
     <AppBar position="static" sx={{background:'none',boxShadow:'none'}}>
       <Container maxWidth="xl" >
         <Toolbar disableGutters sx={{justifyContent:"space-between"}} >
-        <img src={Logo} sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} style={{height:"120px",width:"120px"}}/>
+          <Link to={pages.length!==0 && pages[0].link}>
+          <img src={Logo} sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} style={{height:"120px",width:"120px"}}/>
+          </Link>
           <Box sx={{  display: { xs: 'block', md: 'none' } }}>
             <IconButton
               size="large"
@@ -80,8 +83,10 @@ React.useEffect(()=>{
               }}
             >
               {pages.map((page) => (
-                <MenuItem  key={page} onClick={handleCloseNavMenu} >
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem  key={page.name} onClick={handleCloseNavMenu} >
+                  <Link to={page.link} style={{textDecoration:'none',color:"inherit"}}>
+                  <Typography textAlign="center">{page.name}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
                               <MenuItem  onClick={handleCloseNavMenu} >
@@ -98,11 +103,14 @@ React.useEffect(()=>{
           <Box sx={{ flexGrow: 1, display:{xs:'none',md:'flex'},justifyContent:'center',fontFamily: 'Roboto' }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.name}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: '#6F6C84', display: 'block' ,marginLeft:6,letterSpacing:2}}
               >
-                {page}
+                <Link to={page.link} style={{textDecoration:'none',color:"inherit"}}>
+                {page.name}
+                </Link>
+                
               </Button>
             ))}
           </Box>

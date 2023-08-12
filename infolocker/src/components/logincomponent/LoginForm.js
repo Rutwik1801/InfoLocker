@@ -13,7 +13,7 @@ import {  signOut ,createUserWithEmailAndPassword,signInWithEmailAndPassword} fr
 import store from '../../store/store';
 import {loginSliceActions} from '../../store/loginSlice';
 import {useDispatch} from 'react-redux';
-import { createUserData } from '../../asyncFunctions';
+import { postUserId } from '../../asyncFunctions';
 import { alertSliceActions } from '../../store/alertSlice';
 
 
@@ -61,7 +61,7 @@ const handleClick=async ()=>{
         console.log(user)
         if(user.emailVerified===false){
           setEmailError("enter valid email")
-const currUser = auth.currentUser;
+         const currUser = auth.currentUser;
 
 deleteUser(currUser).then(() => {
   // User deleted.
@@ -72,7 +72,9 @@ deleteUser(currUser).then(() => {
   // ...
 });
           return;
-        }
+        } 
+ 
+    postUserId(user.uid)
         // ...
       })
       .catch((error) => {
@@ -99,7 +101,8 @@ else {
     setEmailError("enter valid email")
     return;
   }
-  createUserData(user.uid);
+  postUserId(user.uid)
+  // createUserData(user.uid);
   dispatch(loginSliceActions.login({id:user.uid}));
   navigate("/profile")
   // ...
@@ -127,7 +130,8 @@ signInWithPopup(auth, provider)
       return;
     }
     console.log(user);
-    createUserData(user.uid)
+    postUserId(user.uid)
+    // createUserData(user.uid)
     dispatch(loginSliceActions.login({id:user.uid}));
     navigate("/profile")
     // IdP data available using getAdditionalUserInfo(result)
