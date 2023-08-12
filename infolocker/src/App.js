@@ -22,6 +22,7 @@ import HowToUse from "./components/HowToUse";
 import TnC from "./TnC"
 import PrivacyPolicy from "./PrivacyPolicy";
 import PublicRoutes from "./components/typeOfRoute/PublicRoutes";
+import ContactUs from "./components/contactUs/ContactUs";
 // const customTheme = createTheme({
 
 
@@ -59,6 +60,7 @@ function App() {
         <Route  path="/howtouse" element={<PublicRoutes><HowToUse/></PublicRoutes>} />
         <Route  path="/tnc" element={<PublicRoutes><TnC/></PublicRoutes>} />
         <Route  path="/privacy" element={<PublicRoutes><PrivacyPolicy/></PublicRoutes>} />
+        <Route  path="/contactus" element={<PublicRoutes><ContactUs/></PublicRoutes>} />
         </Routes>
         <Routes>
              <Route exact path="/profile" element={<ProtectedRoutes><HomePage/></ProtectedRoutes>} />
@@ -67,6 +69,7 @@ function App() {
         <Route  path="/profile/howtouse" element={<ProtectedRoutes><HowToUse/></ProtectedRoutes>} />
         <Route  path="/profile/tnc" element={<ProtectedRoutes><TnC/></ProtectedRoutes>} />
         <Route  path="/profile/privacy" element={<ProtectedRoutes><PrivacyPolicy/></ProtectedRoutes>} />
+        <Route  path="/profile/contactus" element={<ProtectedRoutes><ContactUs/></ProtectedRoutes>} />
         </Routes>
      
      

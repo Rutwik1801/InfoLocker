@@ -19,8 +19,8 @@ function Footer() {
               About Us
               </Link>
               </Typography>
-            <Typography  sx={{marginBottom:"10px"}} style={{textDecoration:'none',color:"inherit"}}>Contact Us</Typography>
-            <Typography>Mail</Typography>
+            <Typography  sx={{marginBottom:"10px"}} style={{textDecoration:'none',color:"inherit"}}> <Link to={userId?"/profile/contactus":"/contactus"} style={{textDecoration:'none',color:"inherit"}}>Contact Us</Link></Typography>
+            
             
         </Container>
         <Container sx={{textAlign:"center"}}>
@@ -29,11 +29,11 @@ function Footer() {
               Terms And Conditions
               </Link>
               </Typography>
-              <Typography sx={{marginBottom:"10px"}}>
+              {/* <Typography sx={{marginBottom:"10px"}}>
               <Link to={userId?"/profile/howtouse":"/howtouse"} style={{textDecoration:'none ',color:"inherit"}}>
               How To Use
               </Link>
-              </Typography>
+              </Typography> */}
               <Typography sx={{marginBottom:"10px"}}>
               <Link to={userId?"/profile/privacy":"/privacy"} style={{textDecoration:'none',color:"inherit"}}>
               Privacy Policy
