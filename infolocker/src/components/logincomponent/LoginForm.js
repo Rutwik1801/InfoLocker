@@ -104,6 +104,10 @@ else {
   postUserId(user.uid)
   // createUserData(user.uid);
   dispatch(loginSliceActions.login({id:user.uid}));
+  const messageString="Login Successful";
+ 
+  dispatch(alertSliceActions.fireTrue({flag:true,alertMessage:messageString}));
+ 
   navigate("/profile")
   // ...
 })
@@ -133,6 +137,9 @@ signInWithPopup(auth, provider)
     postUserId(user.uid)
     // createUserData(user.uid)
     dispatch(loginSliceActions.login({id:user.uid}));
+    const messageString="Login Successful";
+ 
+    dispatch(alertSliceActions.fireTrue({flag:true,alertMessage:messageString}));
     navigate("/profile")
     // IdP data available using getAdditionalUserInfo(result)
     // ...

@@ -50,12 +50,13 @@ const handleClick=async ()=>{
     //postMessage(nameData,emailData,messageData)
   
   const messageString="Message Sent Successfully";
+ 
   dispatch(alertSliceActions.fireTrue({flag:true,alertMessage:messageString}));
-  setIsLoading(true)
-  setTimeout(()=>{
-    setIsLoading(false)
-    navigate("/profile")
- },1000)
+  setNameData("");
+  setEmailData("");
+  setMessageData("");
+  
+ 
 }
 
 
@@ -145,6 +146,9 @@ const handleClick=async ()=>{
 
   </div>}
   </div>
+
+  <AlertComponent />
+
 <Footer />
     </div>
 
