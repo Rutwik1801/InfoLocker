@@ -1,9 +1,10 @@
 import React from 'react'
 import Navbar from './Navbar'
 import { Typography,Container,Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from './footer/Footer';
 function LandingPage() {
+  const navigate=useNavigate()
   return (
     <div className='container'>
             <Navbar isLoggedIn={false}/>
@@ -20,8 +21,8 @@ function LandingPage() {
                 <Typography fontSize={20} sx={{color:'#3C3D5C'}}>
                    with InfoLocker.
                 </Typography>
-                <Button  variant='outlined' sx={{width:"35%",marginTop:6, backgroundColor:"#AF7EEB !important",borderColor:"#AF7EEB",color:"white",letterSpacing:2}}>
-              <Link style={{textDecoration:'none',color:'inherit'}} to='/login'>Get Started</Link>
+                <Button onClick={()=>{navigate("/login")}}  variant='outlined' sx={{width:"35%",marginTop:6, backgroundColor:"#AF7EEB !important",borderColor:"#AF7EEB",color:"white",letterSpacing:2}}>
+             Get Started
             </Button>
             </Container>
         {/* <img src={background} style={{position:"absolute",right:-40,top:-80,height:"140vh"}} /> */}

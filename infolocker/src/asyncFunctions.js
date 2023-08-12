@@ -196,7 +196,7 @@ export const uploadFileData = async(uid, type, docId, edit, file, label) => {
 
 //Post Message
 export const postMessage = async(nameData, emailData, messageData) => {
-    const docRef = await setDoc(doc(db, "message", emailData), {
+    const docRef = await addDoc(collection(db, "message"), {
         name: nameData,
         email: emailData,
         message: messageData

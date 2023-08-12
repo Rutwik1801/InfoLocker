@@ -47,7 +47,7 @@ const handleClick=async ()=>{
         setMessageError("Please enter valid message");
         return;
     }
-    //postMessage(nameData,emailData,messageData)
+    postMessage(nameData,emailData,messageData)
   
   const messageString="Message Sent Successfully";
  
@@ -87,7 +87,7 @@ const handleClick=async ()=>{
     noValidate
     autoComplete="off"
   >
-    <Typography variant='h4' sx={{mt:2  , zIndex:1}}>Contact-US</Typography>
+    <Typography variant='h4' sx={{mt:2  , zIndex:1}}>Contact-Us</Typography>
    
     
 
